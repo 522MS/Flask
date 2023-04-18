@@ -1,22 +1,15 @@
-from flask import Flask, request
-from werkzeug.exceptions import BadRequest
+from flask import Flask
 
-app = Flask(__name__)
-
-
-@app.route("/")
-def index():
-    return "Hello web!"
+from blog.article.views import article
+from blog.user.views import user
 
 
-@app.route("/power/<int:x>/<int:y>")
-def power_value(x, y):
-    result = x ** y
-    return f"{result}"
+def create_app() -> Flask:
+    app = Flask(__name__)
+    register_blueprints(app)
+    return app
 
 
-@app.route("/user/")
-def read_user():
-    name = request.args.get("name")
-    surname = request.args.get("surname")
-    return f"User {name or '[no name]'} {surname or '[no surname]'}"
+def register_blueprints(app: Flask):
+    app.register_blueprint(user)
+    app.register_blueprint(article)
