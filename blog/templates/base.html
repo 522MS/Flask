@@ -12,15 +12,15 @@
 </head>
 <body>
 
-{% include 'navbar.html' %}
+    {% include 'navbar.html' %}
 
-<div class="container">
-    {% block body %}{% endblock %}
-</div>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
 
-{% block js %}
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-{% endblock %}
+    {% block js %}
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    {% endblock %}
 
 </body>
 </html>

@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Текст статьи - {{ text }}</h1>
-    <h1>Автор статьи - <a href="{{ url_for('user.get_user', pk=user_id) }}">{{ author }}</a></h1>
+    {% if current_user.is_authenticated %}
+        <h1>Текст статьи - {{ text }}</h1>
+    {% else %}
+        <h1>Авторизуйтесь чтобы увидеть стаью</h1>
+    {% endif %}
+
 {% endblock %}
