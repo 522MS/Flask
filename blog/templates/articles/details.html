@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Article detail
+{% endblock %}
+
+{% block body %}
+    {% if current_user.is_authenticated %}
+        <h1>Текст статьи - {{ text }}</h1>
+    {% else %}
+        <h1>Авторизуйтесь чтобы увидеть стаью</h1>
+    {% endif %}
+
+{% endblock %}
