@@ -7,16 +7,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
+    <h1>Register</h1>
     {% if error %}
         <div class="alert alert-danger">
             {{ error }}
         </div>
     {% endif %}
+
     <form method="POST">
         {{ form.csrf_token() }}
 
-        {% for field in ['username', 'password'] %}
+        {% for field in ['first_name', 'last_name', 'username', 'email', 'password', 'confirm'] %}
             {{ render_field(form[field]) }}
         {% endfor %}
 

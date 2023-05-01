@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate
 
 from blog.article.views import article
 from blog.auth.views import auth, login_manager
 from blog.models.database import db
+from blog.security import flask_bcrypt
 from blog.user.views import user
 import os
 
@@ -21,11 +22,17 @@ def create_app() -> Flask:
     migrate = Migrate()
     migrate.init_app(app, db, compare_type=True)
 
+    flask_bcrypt.init_app(app)
+
+    @app.route("/")
+    def index():
+        return render_template("index.html")
+
+    app.register_blueprint(user)
+    app.register_blueprint(article)
+    app.register_blueprint(auth, url_prefix="/auth")
+    login_manager.init_app(app)
+
     return app
 
 
-def register_blueprints(app: Flask):
-    app.register_blueprint(user)
-    app.register_blueprint(article)
-    app.register_blueprint(auth)
-    login_manager.init_app(app)

@@ -1,21 +1,22 @@
+import os
+
 from blog.app import create_app
 from blog.models.database import db
 
 app = create_app()
 
 
-@app.cli.command("init-db", help="create all db")
-def init_db():
-    db.create_all()
-    print("done!")
-
-
-@app.cli.command("create-users", help="create users")
-def create_users():
+@app.cli.command("create-admin")
+def create_admin():
+    """
+    Run in your terminal:
+    ➜ flask create-admin
+    > created admin: <User #1 'admin'>
+    """
     from blog.models import User
+
     admin = User(username="admin", is_staff=True)
-    james = User(username="james")
+    admin.password = os.environ.get("ADMIN_PASSWORD") or "adminpass"
     db.session.add(admin)
-    db.session.add(james)
     db.session.commit()
-    print("done! created users:", admin, james)
+    print("created admin:", admin)
