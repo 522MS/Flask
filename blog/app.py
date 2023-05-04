@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 
 from blog.article.views import article
 from blog.auth.views import auth, login_manager
+from blog.author.views import author
 from blog.models.database import db
 from blog.security import flask_bcrypt
 from blog.user.views import user
@@ -31,6 +32,7 @@ def create_app() -> Flask:
     app.register_blueprint(user)
     app.register_blueprint(article)
     app.register_blueprint(auth, url_prefix="/auth")
+    app.register_blueprint(author, url_prefix="/authors")
     login_manager.init_app(app)
 
     return app
