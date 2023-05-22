@@ -38,26 +38,6 @@ def get_article(pk: int):
 def create_article_form():
     form = CreateArticleForm(request.form)
     return render_template("articles/create.html", form=form)
-#
-#
-# @article.route("/create", methods=["POST"])
-# @login_required
-# def create_article():
-#     form = CreateArticleForm(request.form)
-#     if form.validate_on_submit():
-#         _article = Article(title=form.title.data.strip(), body=form.body.data)
-#         if not current_user.author:
-#             author = Author(user_id=current_user.id)
-#             db.session.add(author)
-#             db.session.commit()
-#
-#         _article.author_id = current_user.author.id
-#
-#         db.session.add(_article)
-#         db.session.commit()
-#
-#         return redirect(url_for("article.get_article", pk=_article.id))
-#     return render_template("articles/create.html", form=form)
 
 
 @article.route("/create/", methods=["GET", "POST"], endpoint="create")

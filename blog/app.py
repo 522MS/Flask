@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_migrate import Migrate
 
+from blog.admin import admin
 from blog.article.views import article
 from blog.auth.views import auth, login_manager
 from blog.author.views import author
@@ -24,6 +25,8 @@ def create_app() -> Flask:
     migrate.init_app(app, db, compare_type=True)
 
     flask_bcrypt.init_app(app)
+
+    admin.init_app(app)
 
     @app.route("/")
     def index():
