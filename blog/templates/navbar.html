@@ -18,7 +18,7 @@
                 </li>
                     {% if current_user.is_authenticated %}
                       <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('article.create_article_form') }}">Create article</a>
+                        <a class="nav-link active" href="{{ url_for('article.create') }}">Create article</a>
                       </li>
                     {% endif %}
                 <li>
